@@ -1,20 +1,33 @@
 import React, {Component} from "react";
 
 class Product extends Component {
+    constructor(props) {
+        super(props);
+        this.handleUpVote = this.handleUpVote.bind(this);
+    }
+    handleUpVote() {
+        this.props.onVote(this.props.id);
+    }
     render() {
         return(
             <div className="item">
                 <div className="image">
-                    <img src="https://placekitten.com/200/200" alt="First"/>
+                    <img src={this.props.productImageUrl} alt="First"/>
                 </div>
                 <div className="middle aligned content">
+                    <div className="header">
+                        <a onClick={this.handleUpVote}>
+                            <i className="large caret up icon" />
+                        </a>
+                        {this.props.votes}
+                    </div>
                     <div className="description">
-                        <a>Fort Knight</a>
-                        <p>Authentic renaissance actors, delivered in just two weeks.</p>
+                        <a href={this.props.url}>{this.props.title}</a>
+                        <p>{this.props.description}</p>
                     </div>
                     <div className="extra">
                         <span>Submitted by:</span>
-                        <img src="https://placekitten.com/50/50" alt="Second"/>
+                        <img src={this.props.submitterAvatarUrl} alt="Second"/>
                     </div>
                 </div>
             </div>

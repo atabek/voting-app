@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ProductList from '../../components/ProductList/ProductList';
 
 class App extends Component {
   render() {
     return (
-      <div id="main" class="main ui">
-        <h1 class="ui dividing centered header">Timers</h1>
+      <div id="main" className="main ui text container">
+        <h1 className="ui dividing centered header">Popular Products</h1>
+        <ProductList />
       </div>
     );
   }

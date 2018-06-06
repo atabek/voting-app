@@ -1,28 +1,21 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import Product from "../Product/Product";
 import data from "../../js/seed";
 
 class ProductList extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            products: [],
-        };
-
-        this.handleProductUpVote = this.handleProductUpVote.bind(this);
-    }
+    state = {
+        products: [],
+    };
 
     componentDidMount() {
         this.setState({
             products: data
         });
     }
-    handleProductUpVote(productId) {
+    handleProductUpVote = (productId) => {
         const nextProducts = this.state.products.map((product) => {
-            if(product.id === productId) {
-                console.log(product.votes);
+            if (product.id === productId) {
                 return Object.assign({}, product, {
                     votes: product.votes + 1,
                 });
@@ -30,19 +23,17 @@ class ProductList extends Component {
                 return product;
             }
         });
-
         this.setState({
             products: nextProducts,
         });
-        console.log(nextProducts);
     }
     render() {
-        const products = data.sort((a,b) => (
+        const products = data.sort((a, b) => (
             b.votes - a.votes
         ));
-        
+
         const productComponents = products.map((product) => (
-            <Product 
+            <Product
                 key={"product" + product.id}
                 id={product.id}
                 title={product.title}
@@ -54,7 +45,7 @@ class ProductList extends Component {
                 onVote={this.handleProductUpVote}
             />
         ));
-        return(
+        return (
             <div className="ui unstackable items">
                 {productComponents}
             </div>
